@@ -7,14 +7,16 @@
         body {
             margin: 0;
             background: black;
-            color: white;
-            text-align: center;
             font-family: Arial;
             overflow: hidden;
         }
 
+        /* BUTTON CENTER */
         button {
-            margin-top: 200px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             padding: 15px 30px;
             font-size: 22px;
             border: none;
@@ -25,75 +27,84 @@
             box-shadow: 0 0 20px red;
         }
 
+        /* BIG CENTER NAME */
+        #name {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 100px;
+            font-weight: bold;
+            color: pink;
+            text-shadow: 0 0 30px red, 0 0 60px orange;
+            animation: zoomIn 1.2s forwards;
+        }
+
+        @keyframes zoomIn {
+            to {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        /* MESSAGE BELOW */
         #message {
             display: none;
-            font-size: 45px;
-            margin-top: 40px;
-            animation: glow 1.5s infinite alternate;
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+            color: white;
+            opacity: 0.9;
         }
 
-        @keyframes glow {
-            from { text-shadow: 0 0 10px red; }
-            to { text-shadow: 0 0 30px orange; }
-        }
-
-        /* Floating Hearts */
+        /* HEARTS */
         .heart {
             position: absolute;
-            color: red;
-            font-size: 20px;
-            animation: floatUp 4s linear infinite;
+            font-size: 24px;
+            color: pink;
+            animation: floatUp 5s linear infinite;
         }
 
         @keyframes floatUp {
-            0% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-600px);
-                opacity: 0;
-            }
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-700px); opacity: 0; }
         }
     </style>
 </head>
 
 <body>
 
-<!-- 🎵 Background Music -->
+<!-- 🎵 Music -->
 <audio id="bgMusic" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <button onclick="startWish()">Click Me 🔥</button>
 
-<div id="message"></div>
+<div id="name">Angel 💖</div>
+<div id="message">🎉 Happy Birthday 🎉</div>
 
 <script>
 function startWish() {
 
+    // Hide button
     document.querySelector("button").style.display = "none";
 
-    // Music play
+    // Play music (Kesariya instrumental)
     document.getElementById("bgMusic").play();
 
-    let text = "🎉 Happy Birthday Angel 🎉";
-    let i = 0;
+    // Show BIG center name
+    let name = document.getElementById("name");
+    name.style.display = "block";
 
-    let msg = document.getElementById("message");
-    msg.style.display = "block";
+    // Show message after 2 sec
+    setTimeout(() => {
+        document.getElementById("message").style.display = "block";
+    }, 2000);
 
-    // Typing effect
-    let typing = setInterval(() => {
-        if (i < text.length) {
-            msg.innerHTML += text.charAt(i);
-            i++;
-        } else {
-            clearInterval(typing);
-        }
-    }, 80);
-
-    // Floating Hearts
+    // Floating hearts
     setInterval(() => {
         let heart = document.createElement("div");
         heart.classList.add("heart");
@@ -102,12 +113,11 @@ function startWish() {
         heart.style.bottom = "0px";
         document.body.appendChild(heart);
 
-        setTimeout(() => {
-            heart.remove();
-        }, 4000);
+        setTimeout(() => heart.remove(), 5000);
     }, 300);
 }
 </script>
 
 </body>
 </html>
+    
