@@ -12,14 +12,14 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            cursor: pointer;
         }
 
-        /* HEART */
+        /* HEART OUTLINE */
         .heart {
             position: relative;
             width: 220px;
             height: 220px;
-            background: red;
             transform: rotate(-45deg) scale(0);
             animation: buildHeart 2s forwards;
         }
@@ -30,8 +30,9 @@
             position: absolute;
             width: 220px;
             height: 220px;
-            background: red;
+            border: 5px solid red;
             border-radius: 50%;
+            background: transparent;
         }
 
         .heart::before {
@@ -42,6 +43,11 @@
         .heart::after {
             left: 110px;
             top: 0;
+        }
+
+        .heart {
+            border: 5px solid red;
+            background: transparent;
         }
 
         @keyframes buildHeart {
@@ -55,9 +61,9 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) rotate(45deg);
+            transform: translate(-50%, -50%);
             color: white;
-            font-size: 40px;
+            font-size: 45px;
             font-weight: bold;
             text-align: center;
             opacity: 0;
@@ -80,32 +86,34 @@
         }
 
         @keyframes fall {
-            from {
-                transform: translateY(-10px);
-            }
-            to {
-                transform: translateY(100vh);
-            }
+            from { transform: translateY(-10px); }
+            to { transform: translateY(100vh); }
         }
 
     </style>
 </head>
 
-<body>
+<body onclick="playMusic()">
 
 <!-- HEART -->
-<div class="heart">
-    <div class="text">Happy Birthday<br>Angel 💖</div>
-</div>
+<div class="heart"></div>
+
+<!-- TEXT -->
+<div class="text">Happy Birthday<br>Angel 💖</div>
 
 <!-- MUSIC -->
-<audio autoplay loop>
+<audio id="music" loop>
     <source src="kesariya.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-    // STARS GENERATOR
-    for (let i = 0; i < 100; i++) {
+    // PLAY MUSIC ON CLICK
+    function playMusic() {
+        document.getElementById("music").play();
+    }
+
+    // STARS
+    for (let i = 0; i < 120; i++) {
         let star = document.createElement("div");
         star.className = "star";
         star.style.left = Math.random() * 100 + "vw";
@@ -117,3 +125,4 @@
 
 </body>
 </html>
+            
