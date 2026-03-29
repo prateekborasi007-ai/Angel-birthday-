@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Special Wish</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: black;
+            color: white;
+            text-align: center;
+            font-family: Arial;
+            overflow: hidden;
+        }
+
+        button {
+            margin-top: 200px;
+            padding: 15px 30px;
+            font-size: 22px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(45deg, red, orange);
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 0 20px red;
+        }
+
+        #message {
+            display: none;
+            font-size: 45px;
+            margin-top: 40px;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px red; }
+            to { text-shadow: 0 0 30px orange; }
+        }
+
+        /* Floating Hearts */
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 20px;
+            animation: floatUp 4s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-600px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- 🎵 Background Music -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button onclick="startWish()">Click Me 🔥</button>
+
+<div id="message"></div>
+
+<script>
+function startWish() {
+
+    document.querySelector("button").style.display = "none";
+
+    // Music play
+    document.getElementById("bgMusic").play();
+
+    let text = "🎉 Happy Birthday Angel 🎉";
+    let i = 0;
+
+    let msg = document.getElementById("message");
+    msg.style.display = "block";
+
+    // Typing effect
+    let typing = setInterval(() => {
+        if (i < text.length) {
+            msg.innerHTML += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(typing);
+        }
+    }, 80);
+
+    // Floating Hearts
+    setInterval(() => {
+        let heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.bottom = "0px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 4000);
+    }, 300);
+}
+</script>
+
+</body>
+</html>
